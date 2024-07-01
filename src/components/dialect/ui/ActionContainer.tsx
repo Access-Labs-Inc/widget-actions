@@ -1,9 +1,10 @@
 import { h } from 'preact';
+import * as React from 'preact';
 import { useEffect, useMemo, useReducer, useState } from 'preact/compat';
 import { ActionLayout, ButtonProps } from './ActionLayout';
 import { VersionedTransaction } from '@solana/web3.js';
 import { Action, ActionComponent } from '../api/Action';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useWallet } from '../../wallet-adapter/useWallet';
 import { Buffer } from 'buffer';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import ActionLayoutSkeleton from '../ui/ActionLayoutSkeleton';

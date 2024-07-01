@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import * as React from 'preact';
 import {
   useContext,
   useEffect,

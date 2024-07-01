@@ -1,3 +1,4 @@
+import * as React from 'preact';
 import { h, createContext, VNode, ComponentType, createElement } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 
