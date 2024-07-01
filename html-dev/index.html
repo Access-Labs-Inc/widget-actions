@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACS Actions Widget dev page</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+
+  <body>
+    <div style="padding: 2rem;">
+      <h1>ACS Actions Widget dev page</h1>
+      <h2>The shown widget is for demonstration purpose only</h2>
+
+      <div id="acs"></div>
+    </div>
+
+    <script>
+      (function (w, d, s, o, f, js, fjs) {
+          w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
+          js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
+          js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
+      }(window, document, 'script', '_acs', './widget.js'));
+      _acs('init', {
+        element: document.getElementById('acs'),
+        debug: true,
+        poolName: "The Block",
+        poolId: 'Fxh4hDFHJuTfD3Eq4en36dTk8QvbsSMoTE5Y2hVX3qVt',
+        poolSlug: 'the-block',
+      });
+      document.querySelector("#acs").addEventListener("connected", (event) => {
+        console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
+      });
+      document.querySelector("#acs").addEventListener("lock", (event) => {
+        console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
+      });
+      document.querySelector("#acs").addEventListener("claim", (event) => {
+        console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
+      });
+    </script>
+  </body>
+</html>
