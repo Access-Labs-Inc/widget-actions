@@ -1,15 +1,16 @@
 import { h } from 'preact';
 import * as React from 'preact';
-import { useEffect, useMemo, useReducer, useState } from 'preact/compat';
+import { useEffect, useMemo, useReducer, useState, useContext } from 'preact/compat';
+import { Buffer } from 'buffer';
 import { ActionLayout, ButtonProps } from './ActionLayout';
 import { VersionedTransaction } from '@solana/web3.js';
 import { Action, ActionComponent } from '../api/Action';
-import { useWallet } from '../../wallet-adapter/useWallet';
-import { Buffer } from 'buffer';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import ActionLayoutSkeleton from '../ui/ActionLayoutSkeleton';
 import { PublicConnection } from '../utils/public-connection';
 import { Snackbar } from '../ui/Snackbar';
+import { ConfigContext } from '../../../AppContext';
 import {
   ActionsRegistry,
   getExtendedActionState,
@@ -171,6 +172,7 @@ export const ActionContainer = ({
 }) => {
   const { publicKey, sendTransaction } = useWallet();
   const { setVisible: setWalletModalVisible } = useWalletModal();
+  const { element } = useContext(ConfigContext);
 
   const [action, setAction] = useState<Action | null>(null);
   const [actionState, setActionState] = useState(
@@ -180,6 +182,8 @@ export const ActionContainer = ({
   const [executionState, dispatch] = useReducer(executionReducer, {
     status: actionState !== 'malicious' ? 'idle' : 'blocked',
   });
+
+  console.log("State: ", executionState);
 
   const website = useMemo(() => {
     // TODO: which label for link to show, us or the website
@@ -222,6 +226,8 @@ export const ActionContainer = ({
     init();
   }, [initialApiUrl]);
 
+  console.log("Actions: ", action)
+
   const buttons = useMemo(
     () =>
       toSpliced(action?.actions
@@ -233,6 +239,9 @@ export const ActionContainer = ({
         ), SOFT_LIMIT_BUTTONS) ?? [],
     [action, executionState.executingAction],
   );
+
+  console.log("Buttons: ", buttons)
+
   const inputs = useMemo(
     () =>
       toSpliced(action?.actions
@@ -341,6 +350,16 @@ export const ActionContainer = ({
           type: ExecutionType.FINISH,
           successMessage: tx.message,
         });
+        const boughtEvent = new CustomEvent('bought', {
+          detail: {
+            signature: result.signature
+          },
+          bubbles: true,
+          cancelable: true,
+          composed: false, // if you want to listen on parent turn this on
+        });
+        console.log('Bought event: ', boughtEvent);
+        element?.dispatchEvent(boughtEvent);
       }
     } catch (e) {
       console.error(e);

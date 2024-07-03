@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import * as React from 'preact';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 

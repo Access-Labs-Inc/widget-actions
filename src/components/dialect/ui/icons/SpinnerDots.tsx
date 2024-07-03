@@ -1,6 +1,6 @@
 import * as React from 'preact';
 import { h } from 'preact';
-import { useMemo } from 'preact/compat';
+import { useMemo, Fragment } from 'preact/compat';
 
 const POINTS = [0, 45, 90, 135, 180, 225, 270, 315];
 
@@ -26,7 +26,7 @@ export const SpinnerDots = ({
     [],
   );
   return (
-    <>
+    <Fragment>
       <style>{'@keyframes spin{to{transform:rotate(360deg)}}'}</style>
       <svg
         viewBox="0 0 48 48"
@@ -41,6 +41,6 @@ export const SpinnerDots = ({
       >
         {dots}
       </svg>
-    </>
+    </Fragment>
   );
 };

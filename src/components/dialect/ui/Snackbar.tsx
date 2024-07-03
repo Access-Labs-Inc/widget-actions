@@ -1,4 +1,5 @@
 import { ComponentChildren, h } from 'preact';
+import * as React from 'preact';
 import clsx from 'clsx';
 
 type SnackbarVariant = 'warning' | 'error';

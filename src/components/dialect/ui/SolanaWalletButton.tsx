@@ -1,3 +1,7 @@
+import { h, Fragment } from 'preact';
+import * as React from 'preact';
+import { BaseWalletMultiButton } from '@solana/wallet-adapter-react-ui';
+
 const WalletIcon = () => (
   <svg width={12} height={14} viewBox="0 0 12 14" fill="none">
     <path
@@ -8,12 +12,12 @@ const WalletIcon = () => (
 );
 
 const CONNECT_WALLET = (
-  <>
+  <Fragment>
     <div className="flex flex-row items-center justify-center gap-3">
       <WalletIcon />
       Connect Wallet
     </div>
-  </>
+  </Fragment>
 );
 const LABELS = {
   'change-wallet': 'Change wallet',
@@ -24,12 +28,6 @@ const LABELS = {
   'has-wallet': 'Connect',
   'no-wallet': CONNECT_WALLET,
 } as const;
-
-const BaseWalletMultiButton = dynamic(
-  async () =>
-    (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton,
-  { ssr: false },
-);
 
 export const SolanaWalletButton = () => {
   return (

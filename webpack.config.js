@@ -111,6 +111,7 @@ module.exports = (env) => {
         path: path.resolve(bundleOutputDir),
       },
       devServer: {
+        port: 3000,
         static: bundleOutputDir,
       },
       plugins: plugins,

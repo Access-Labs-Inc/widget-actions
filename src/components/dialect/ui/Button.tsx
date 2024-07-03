@@ -1,4 +1,5 @@
-import { PropsWithChildren } from 'react';
+import { h, ComponentChildren } from 'preact';
+import * as React from 'preact';
 import clsx from 'clsx';
 
 export const Button = ({
@@ -12,7 +13,8 @@ export const Button = ({
   disabled?: boolean;
   variant?: 'success' | 'default' | 'error';
   className?: string;
-} & PropsWithChildren) => {
+  children: ComponentChildren
+}) => {
   return (
     <button
       className={clsx(

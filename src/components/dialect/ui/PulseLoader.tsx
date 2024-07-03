@@ -1,7 +1,7 @@
 import { h } from 'preact';
+import React from 'react';
 
 import { clsx } from 'clsx';
-import React from 'react';
 
 const PulseLoader: React.FC<{
   children?: React.ReactNode;

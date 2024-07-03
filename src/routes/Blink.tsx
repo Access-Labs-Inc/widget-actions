@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import * as React from 'preact';
 import { useContext } from 'preact/hooks';
 
 import { ConfigContext } from '../AppContext';
@@ -9,6 +10,8 @@ export const Blink = () => {
   const actionUrl = `https://actions.dialect.to/api/access-protocol/subscribe/${poolSlug}`
 
   return (
-    <ActionContainer initialApiUrl={actionUrl} />
+    <ActionContainer
+      initialApiUrl={actionUrl}
+    />
   );
 };

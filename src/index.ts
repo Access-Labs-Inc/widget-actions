@@ -3,6 +3,7 @@ import { App } from "./App";
 import loader from "./loader";
 import { Configurations } from "./models";
 
+import '@solana/wallet-adapter-react-ui/styles.css';
 import "./main.css";
 
 /**

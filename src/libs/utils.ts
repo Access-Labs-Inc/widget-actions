@@ -29,5 +29,6 @@ export function clsxp(prefix: string, ...args: ClassValue[]) {
 export function toSpliced<T>(arr: Array<T> | undefined, n: number): Array<T> {
   if (!arr) return [];
   const carr = arr.slice(); //copy
-  return carr.splice(n);
+  carr.splice(n);
+  return carr;
 }

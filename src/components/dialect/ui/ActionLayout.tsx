@@ -1,4 +1,5 @@
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChildren } from 'preact';
+import * as React from 'preact';
 
 import { Button } from './Button';
 import {
@@ -20,7 +21,7 @@ interface LayoutProps {
   success?: string | null;
   websiteUrl?: string | null;
   websiteText?: string | null;
-  disclaimer?: ReactNode;
+  disclaimer?: ComponentChildren;
   type: ActionType;
   title: string;
   description: string;
@@ -60,105 +61,35 @@ const Linkable = ({
   );
 
 export const ActionLayout = ({
-  type,
-  title,
-  description,
-  image,
-  websiteUrl,
-  websiteText,
   buttons,
   inputs,
   error,
   success,
-  disclaimer,
 }: LayoutProps) => {
   return (
-    <div className="mt-3 w-full overflow-hidden rounded-2xl bg-primary p-4 shadow-action">
-      {image && (
-        <div className="relative flex w-full pb-[100%]">
-          <Linkable url={websiteUrl}>
-            <img
-              className="absolute inset-0 aspect-square w-full rounded-lg object-cover object-left"
-              src={image}
-              alt="action-image"
-            />
-          </Linkable>
-        </div>
-      )}
-      <div className="mt-4 flex flex-col">
-        <div className="mb-2 flex items-center gap-2">
-          {websiteUrl && (
-            <a
-              href={websiteUrl}
-              target="_blank"
-              className="inline-flex items-center truncate text-subtext text-quaternary transition-colors hover:cursor-pointer hover:text-[#949CA4] hover:underline motion-reduce:transition-none"
-              rel="noopener noreferrer"
-            >
-              <LinkIcon className="mr-2" />
-              {websiteText ?? websiteUrl}
-            </a>
-          )}
-          {websiteText && !websiteUrl && (
-            <span className="inline-flex items-center truncate text-subtext text-quaternary">
-              {websiteText}
-            </span>
-          )}
-          <a
-            href="https://docs.dialect.to/documentation/actions/security"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center"
-          >
-            {type === 'malicious' && (
-              <Badge
-                variant="error"
-                icon={<ExclamationShieldIcon width={13} height={13} />}
-              >
-                Blocked
-              </Badge>
-            )}
-            {type === 'trusted' && (
-              <Badge
-                variant="default"
-                icon={<InfoShieldIcon width={13} height={13} />}
-              />
-            )}
-            {type === 'unknown' && (
-              <Badge
-                variant="warning"
-                icon={<InfoShieldIcon width={13} height={13} />}
-              />
-            )}
-          </a>
-        </div>
-        <span className="mb-0.5 text-text font-semibold text-primary">
-          {title}
-        </span>
-        <span className="mb-4 text-subtext text-secondary">{description}</span>
-        {disclaimer && <div className="mb-4">{disclaimer}</div>}
-        <div className="flex flex-col gap-2">
-          {buttons && buttons.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2">
-              {buttons?.map((it, index) => (
-                <div key={index} className="flex-auto">
-                  <ActionButton {...it} />
-                </div>
-              ))}
-            </div>
-          )}
-          {inputs?.map((input) => <ActionInput key={input.name} {...input} />)}
-        </div>
-        {success && (
-          <span className="mt-4 flex justify-center text-subtext text-accent-success">
-            {success}
-          </span>
+    <div>
+      <div className="flex flex-col gap-2">
+        {buttons && buttons.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2">
+            {buttons?.map((it, index) => (
+              <div key={index} className="flex-auto">
+                <ActionButton {...it} />
+              </div>
+            ))}
+          </div>
         )}
-        {error && !success && (
-          <span className="mt-4 flex justify-center text-subtext text-accent-error">
-            {error}
-          </span>
-        )}
+        {inputs?.map((input) => <ActionInput key={input.name} {...input} />)}
       </div>
+      {success && (
+        <span className="mt-4 flex justify-center text-subtext text-accent-success">
+          {success}
+        </span>
+      )}
+      {error && !success && (
+        <span className="mt-4 flex justify-center text-subtext text-accent-error">
+          {error}
+        </span>
+      )}
     </div>
   );
 };

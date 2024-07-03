@@ -5,15 +5,15 @@ import {
   useEffect,
   useMemo,
 } from 'preact/hooks';
+import { useWallet } from '@solana/wallet-adapter-react'
+
 import { Router, RouteComponent } from '../layout/Router';
 import { Blink } from '../routes/Blink';
-import { WalletConnectButton } from '../components/wallet-adapter/ui/WalletConnectButton';
-import { WalletModalButton } from '../components/wallet-adapter/ui/WalletModalButton';
-import { useWallet } from '../components/wallet-adapter/useWallet';
 import { ConfigContext } from '../AppContext';
 import env from '../libs/env';
 import { clsxp } from '../libs/utils';
 import { offchainBasicSubscriptionsSchema } from '../validations/subscriptions';
+import { SolanaWalletButton } from '../components/dialect/ui/SolanaWalletButton';
 
 const Main = () => {
   const { publicKey, wallet, connected } = useWallet();
@@ -70,18 +70,9 @@ const Main = () => {
     }
   }, [connected, element]);
 
-  if (!wallet) {
-    return (
-      <div className={clsxp(classPrefix, 'wallet_adapter_dropdown_wrapper')}>
-        <WalletModalButton />
-      </div>
-    );
-  }
   if (!base58) {
     return (
-      <div className={clsxp(classPrefix, 'wallet_adapter_dropdown_wrapper')}>
-        <WalletConnectButton />
-      </div>
+      <SolanaWalletButton />
     );
   }
 
