@@ -1,4 +1,8 @@
+import { h } from 'preact';
+import * as React from 'preact';
+
 import { type SVGProps } from 'react';
+
 export const ExclamationShieldIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

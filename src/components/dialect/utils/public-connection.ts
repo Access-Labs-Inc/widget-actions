@@ -1,5 +1,6 @@
-import { clusterApiUrl, Connection } from '@solana/web3.js';
+import { Connection } from '@solana/web3.js';
 import { ClusterTarget } from '../constants';
+import env from "../../../libs/env";
 
 export class PublicConnection {
   private static instance: PublicConnection;
@@ -7,9 +8,7 @@ export class PublicConnection {
 
   private constructor(private _targetCluster: ClusterTarget) {
     this._connection = new Connection(
-      _targetCluster === 'mainnet'
-        ? process.env.NEXT_PUBLIC_RPC_URL || clusterApiUrl('mainnet-beta')
-        : process.env.NEXT_PUBLIC_RPC_URL_DEVNET || clusterApiUrl('devnet'),
+      env.SOLANA_RPC_URL,
       'confirmed',
     );
   }
