@@ -1,6 +1,6 @@
-# ACS Web Widget
+# ACS Actions Widget
 
-This is a web widget to help you integrate with ACS protocol.
+This is a web widget to help you integrate with ACS protocol Actions.
 
 ## Usage
 
@@ -9,7 +9,7 @@ In order to embed the widget add the following snippet at any location on the ho
 ```html
 <head>
   <!-- Import the styles from us or provide your own -->
-  <link rel="stylesheet" href="https://d3bgshfwq8wmv6.cloudfront.net/acs-widget-staging/main.css" /> 
+  <link rel="stylesheet" href="https://TODO/acs-widget-staging/main.css" /> 
 </head>
 <body>
   ...
@@ -20,7 +20,7 @@ In order to embed the widget add the following snippet at any location on the ho
         w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
         js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
         js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-    }(window, document, 'script', '_acs', 'https://d3bgshfwq8wmv6.cloudfront.net/acs-widget-staging/widget.js'));
+    }(window, document, 'script', '_acs', 'https://TODO/acs-widget-staging/widget.js'));
     _acs('init', {
       element: document.getElementById('acs'),
       poolId: 'Fxh4hDFHJuTfD3Eq4en36dTk8QvbsSMoTE5Y2hVX3qVt',
@@ -36,11 +36,8 @@ In order to embed the widget add the following snippet at any location on the ho
     document.querySelector("#acs").addEventListener("connected", (event) => {
       console.log("Connected to the wallet: " + JSON.stringify(event.detail));
     });
-    document.querySelector("#acs").addEventListener("lock", (event) => {
-      console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
-    });
-    document.querySelector("#acs").addEventListener("claim", (event) => {
-      console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
+    document.querySelector("#acs").addEventListener("bought", (event) => {
+      console.log("Bought tNFT with signature: " + JSON.stringify(event.detail));
     });
   </script>
 </body>
@@ -53,8 +50,8 @@ You can optionally change CSS class prefix `classPrefix` to provide your CSS sty
 ## Production builds
 
 For production use these URLs:
-- `https://d3bgshfwq8wmv6.cloudfront.net/acs-widget/widget.js`
-- `https://d3bgshfwq8wmv6.cloudfront.net/acs-widget/main.css`
+- `https://TODO.cloudfront.net/acs-widget/widget.js`
+- `https://TODO.cloudfront.net/acs-widget/main.css`
 
 ## Develop
 
