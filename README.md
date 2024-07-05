@@ -73,7 +73,7 @@ git tag vX.X.X-beta && git push origin vX.X.X-beta
 ```
 
 After this wait for the Github Actions to finish the deploy to S3 and Cloudfront.
-The demo app will be avail at: https://d3bgshfwq8wmv6.cloudfront.net/acs-widget-staging/index.html
+The demo app will be avail at: https://XXX.cloudfront.net/acs-widget-staging/index.html
 
 
 ## Release new version to production
@@ -84,7 +84,7 @@ git tag vX.X.X && git push origin vX.X.X
 ```
 
 After this wait for the Github Actions to finish the deploy to S3 and Cloudfront.
-The demo app will be avail at: https://d3bgshfwq8wmv6.cloudfront.net/acs-widget/index.html
+The demo app will be avail at: https://XXX.cloudfront.net/acs-widget/index.html
 
 ## License
 The source and documentation in this project are released under the [MIT License](LICENSE)
