@@ -1,5 +1,5 @@
-import { ComponentChildren, h } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { ComponentChildren, h } from 'preact';
 import clsx from 'clsx';
 
 type SnackbarVariant = 'warning' | 'error';

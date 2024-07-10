@@ -1,3 +1,3 @@
-declare module 'array.prototype.tospliced/shim' {
-  export default function toSpliced(): void;
+interface SVGProps<T extends SVGElement = SVGElement>
+  extends preact.JSX.SVGAttributes<T> {
 }

@@ -1,6 +1,3 @@
-import { PublicKey } from '@solana/web3.js';
-
-// Must be written like this othwerwise the webpack will not be able to replace the values!!
 const SOLANA_RPC_URL = process.env.SOLANA_RPC_URL;
 const SOLANA_NETWORK = process.env.SOLANA_NETWORK;
 const GO_API_URL = process.env.GO_API_URL;

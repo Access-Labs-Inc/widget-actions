@@ -1,13 +1,12 @@
-import { h } from 'preact';
-import * as React from 'preact';
+ // @ts-ignore
+import React, { h, VNode } from 'preact';
 import clsx from 'clsx';
-import type { ReactNode } from 'react';
 
 type BadgeVariant = 'warning' | 'error' | 'default';
 
 interface Props {
   variant?: BadgeVariant;
-  icon?: ReactNode;
+  icon?: VNode;
   children?: string;
   className?: string;
 }

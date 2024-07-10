@@ -1,7 +1,11 @@
-import { h } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 
-export const InfoShieldIcon = (props: any) => (
+interface SVGProps<T extends SVGElement = SVGElement>
+  extends preact.JSX.SVGAttributes<T> {
+}
+
+export const InfoShieldIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={16}

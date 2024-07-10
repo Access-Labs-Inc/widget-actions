@@ -1,7 +1,7 @@
 import { Configurations } from "./models";
 
 type MethodNames = "init" | "event";
-export const DEFAULT_NAME = "_acs";
+export const DEFAULT_NAME = "_acs_blink";
 
 /**
  * Represents a model that is created in embedded script
@@ -24,7 +24,7 @@ interface LoaderObject {
  * @param render A method to be called once initialization done and DOM element for hosting widget is ready.
  */
 export default (
-  win: Window,
+  win: Window & { [key: string]: any },
   defaultConfig: Configurations,
   scriptElement: Element | null,
   render: (element: HTMLElement, config: Configurations) => void

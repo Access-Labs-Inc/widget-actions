@@ -1,5 +1,5 @@
-import { h } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 import {
   useContext,
   useEffect,
@@ -11,16 +11,14 @@ import { Router, RouteComponent } from '../layout/Router';
 import { Blink } from '../routes/Blink';
 import { ConfigContext } from '../AppContext';
 import env from '../libs/env';
-import { clsxp } from '../libs/utils';
 import { offchainBasicSubscriptionsSchema } from '../validations/subscriptions';
 import { SolanaWalletButton } from '../components/dialect/ui/SolanaWalletButton';
 
 const Main = () => {
-  const { publicKey, wallet, connected } = useWallet();
+  const { publicKey, connected } = useWallet();
   const {
     element,
     poolId,
-    classPrefix,
   } = useContext(ConfigContext);
   const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
 

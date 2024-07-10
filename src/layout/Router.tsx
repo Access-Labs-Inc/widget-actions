@@ -1,5 +1,5 @@
-import * as React from 'preact';
-import { h, createContext, VNode, ComponentType, createElement } from 'preact';
+// @ts-ignore
+import React, { h, createContext, VNode, ComponentType, createElement } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 
 const DEFAULT_ROUTE = '/';
