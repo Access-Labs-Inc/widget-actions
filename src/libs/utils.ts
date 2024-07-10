@@ -26,9 +26,9 @@ export function clsxp(prefix: string, ...args: ClassValue[]) {
   return clsx(args.filter(Boolean).map((arg) => `${prefix}${arg}`));
 }
 
-export function toSpliced<T>(arr: Array<T> | undefined, n: number): Array<T> {
-  if (!arr) return [];
-  const carr = arr.slice(); //copy
+export function toSpliced<T>(arr: T[] | undefined, n: number): T[] {
+  if (!arr) { return []; }
+  const carr = arr.slice(); // copy
   carr.splice(n);
   return carr;
 }

@@ -5,7 +5,7 @@ import {
   useEffect,
   useMemo,
 } from 'preact/hooks';
-import { useWallet } from '@solana/wallet-adapter-react'
+import { useWallet } from '@solana/wallet-adapter-react';
 
 import { Router, RouteComponent } from '../layout/Router';
 import { Blink } from '../routes/Blink';

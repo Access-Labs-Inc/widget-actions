@@ -7,7 +7,7 @@ import { ActionContainer } from '../components/dialect/ui/ActionContainer';
 
 export const Blink = () => {
   const { poolSlug } = useContext(ConfigContext);
-  const actionUrl = `https://actions.dialect.to/api/access-protocol/subscribe/${poolSlug}`
+  const actionUrl = `https://actions.dialect.to/api/access-protocol/subscribe/${poolSlug}`;
 
   return (
     <ActionContainer
