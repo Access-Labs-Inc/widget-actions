@@ -1,7 +1,11 @@
-import * as React from 'preact';
-import { h } from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 
-export const LinkIcon = (props: any) => (
+interface SVGProps<T extends SVGElement = SVGElement>
+  extends preact.JSX.SVGAttributes<T> {
+}
+
+export const LinkIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={16}

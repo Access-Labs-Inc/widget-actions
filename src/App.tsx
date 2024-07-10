@@ -1,5 +1,5 @@
-import { h } from "preact";
-import React from 'react';
+ // @ts-ignore
+import React, { h } from "preact";
 import { useMemo } from "preact/hooks";
 
 import {

@@ -1,13 +1,16 @@
-import { h } from 'preact';
-import React from 'react';
+// @ts-ignore
+import React, { h, VNode } from 'preact';
+import { CSSProperties } from 'preact/compat';
 
 import { clsx } from 'clsx';
 
-const PulseLoader: React.FC<{
-  children?: React.ReactNode;
+type PulseLoaderProps = {
+  children?: VNode;
   className: string;
-  style?: React.CSSProperties;
-}> = ({ children, className, style }) => {
+  style?: CSSProperties;
+}
+
+const PulseLoader = ({ children, className, style }: PulseLoaderProps) => {
   return (
     <div className={clsx('animate-pulse', className)} style={style}>
       {children}

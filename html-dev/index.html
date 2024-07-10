@@ -13,7 +13,7 @@
       <h1>ACS Actions Widget dev page</h1>
       <h2>The shown widget is for demonstration purpose only</h2>
 
-      <div id="acs"></div>
+      <div id="acs-blink"></div>
     </div>
 
     <script>
@@ -21,18 +21,18 @@
           w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
           js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
           js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-      }(window, document, 'script', '_acs', './widget.js'));
-      _acs('init', {
-        element: document.getElementById('acs'),
+      }(window, document, 'script', '_acs_blink', './widget.js'));
+      _acs_blink('init', {
+        element: document.getElementById('acs-blink'),
         debug: true,
         poolName: "The Block",
         poolId: 'Fxh4hDFHJuTfD3Eq4en36dTk8QvbsSMoTE5Y2hVX3qVt',
         poolSlug: 'the-block',
       });
-      document.querySelector("#acs").addEventListener("connected", (event) => {
+      document.querySelector("#acs-blink").addEventListener("connected", (event) => {
         console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
       });
-      document.querySelector("#acs").addEventListener("bought", (event) => {
+      document.querySelector("#acs-blink").addEventListener("bought", (event) => {
         console.log("Bought with address: " + JSON.stringify(event.detail));
       });
     </script>

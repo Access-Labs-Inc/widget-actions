@@ -1,6 +1,5 @@
-import { h } from 'preact';
-import React from 'preact';
-import PulseLoader from './PulseLoader';
+// @ts-ignore
+import React, { h } from 'preact';
 
 const ActionLayoutSkeleton = () => {
   return (

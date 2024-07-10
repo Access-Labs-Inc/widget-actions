@@ -1,5 +1,5 @@
-import { h } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 import { useEffect, useMemo, useReducer, useState, useContext } from 'preact/compat';
 import { Buffer } from 'buffer';
 import { ActionLayout, ButtonProps } from './ActionLayout';

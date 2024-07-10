@@ -5,13 +5,15 @@ export const testConfig = (override?: {}): Configurations =>
     {
       poolId: '1',
       poolName: 'name',
+      poolSlug: 'name',
+      classPrefix: 'prefix'
     },
     override
   );
 
 /** This closely replicates what installation script does on page (e.g. /dev/index.html) */
 export const install = (name: string, config?: Partial<Configurations>) => {
-  const w = window;
+  const w: Window & { [key: string]: any } = window;
   // tslint:disable-next-line: only-arrow-functions
   w[name] =
     w[name] ||

@@ -1,5 +1,5 @@
-import { h, ComponentChildren } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h, VNode } from 'preact';
 import clsx from 'clsx';
 
 export const Button = ({
@@ -13,7 +13,7 @@ export const Button = ({
   disabled?: boolean;
   variant?: 'success' | 'default' | 'error';
   className?: string;
-  children: ComponentChildren
+  children: VNode<any>;
 }) => {
   return (
     <button

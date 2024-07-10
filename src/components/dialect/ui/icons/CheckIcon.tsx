@@ -1,6 +1,9 @@
-import { h } from 'preact';
-import * as React from 'react';
-import { SVGProps } from 'react';
+// @ts-ignore
+import React, { h } from 'preact';
+
+interface SVGProps<T extends SVGElement = SVGElement>
+  extends preact.JSX.SVGAttributes<T> {
+}
 
 export const CheckIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg

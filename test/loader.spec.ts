@@ -2,6 +2,8 @@ import loader, { DEFAULT_NAME } from '../src/loader';
 import { install, testConfig, randomStr, currentScript } from './common';
 import { Configurations } from '../src/models';
 
+const win: Window & { [key: string]: any } = window;
+
 describe('loader', () => {
   it('should throw error if poolId not provided', () => {
     // arrange
@@ -11,7 +13,7 @@ describe('loader', () => {
 
     // act
     expect(() =>
-      loader(window, testConfig({ poolId: null }), null, renderMock)
+      loader(win, testConfig({ poolId: null }), null, renderMock)
     ).toThrowError("You must provide 'poolId' in 'init' method.");
   });
 
@@ -24,7 +26,7 @@ describe('loader', () => {
     // act
     expect(() =>
       loader(
-        window,
+        win,
         testConfig({ poolId: '1', poolName: null }),
         null,
         renderMock
@@ -42,8 +44,8 @@ describe('loader', () => {
     loader(window, testConfig(), null, renderMock);
 
     // assert
-    expect(window[expectedName]).toBeDefined();
-    expect(window['loaded-' + expectedName]).toBeDefined();
+    expect(win[expectedName]).toBeDefined();
+    expect(win['loaded-' + expectedName]).toBeDefined();
     expect(renderMock).toBeCalled();
   });
 
@@ -54,11 +56,11 @@ describe('loader', () => {
     const renderMock = jest.fn();
 
     // act
-    loader(window, testConfig(), currentScript(expectedName), renderMock);
+    loader(win, testConfig(), currentScript(expectedName), renderMock);
 
     // assert
-    expect(window[expectedName]).toBeDefined();
-    expect(window['loaded-' + expectedName]).toBeDefined();
+    expect(win[expectedName]).toBeDefined();
+    expect(win['loaded-' + expectedName]).toBeDefined();
     expect(renderMock).toBeCalled();
   });
 
@@ -79,15 +81,15 @@ describe('loader', () => {
     );
 
     // act
-    loader(window, testConfig(), currentScript(expectedName1), renderMock1);
-    loader(window, testConfig(), currentScript(expectedName2), renderMock2);
+    loader(win, testConfig(), currentScript(expectedName1), renderMock1);
+    loader(win, testConfig(), currentScript(expectedName2), renderMock2);
 
     // assert
-    expect(window[expectedName1]).toBeDefined();
-    expect(window[expectedName2]).toBeDefined();
+    expect(win[expectedName1]).toBeDefined();
+    expect(win[expectedName2]).toBeDefined();
 
-    expect(window['loaded-' + expectedName1]).toBeDefined();
-    expect(window['loaded-' + expectedName2]).toBeDefined();
+    expect(win['loaded-' + expectedName1]).toBeDefined();
+    expect(win['loaded-' + expectedName2]).toBeDefined();
 
     expect(renderMock1).toBeCalledWith(
       expect.anything(),
