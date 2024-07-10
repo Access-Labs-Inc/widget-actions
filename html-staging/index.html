@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ACS Widget dev page</title>
+    <title>ACS Widget Actions - Staging</title>
     <link rel="icon" href="./favicon.ico" />
     <link rel="stylesheet" href="./main.css" />
   </head>
 
   <body>
     <div style="padding: 2rem;">
-      <h1>ACS Widget dev page</h1>
+      <h1>ACS Widget Actions - Staging</h1>
       <h2>The shown widget is for demonstration purpose only</h2>
 
-      <div id="acs"></div>
+      <div id="acs-blink"></div>
     </div>
 
     <script>
@@ -21,9 +21,9 @@
           w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
           js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
           js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-      }(window, document, 'script', '_acs', './widget.js'));
-      _acs('init', {
-        element: document.getElementById('acs'),
+      }(window, document, 'script', '_acs_blink', './widget.js'));
+      _acs_blink('init', {
+        element: document.getElementById('acs-blink'),
         debug: true,
         poolId: '2hQSDVwJLbtwHzi3CKj8pmiQzLyfKZs5ZDhT1QZdHXv3',
         poolName: "The Block",

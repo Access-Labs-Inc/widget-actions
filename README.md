@@ -9,20 +9,20 @@ In order to embed the widget add the following snippet at any location on the ho
 ```html
 <head>
   <!-- Import the styles from us or provide your own -->
-  <link rel="stylesheet" href="https://TODO/acs-widget-staging/main.css" /> 
+  <link rel="stylesheet" href="https://d365a01fpruiwk.cloudfront.net/acs-widget-actions-staging/main.css" /> 
 </head>
 <body>
   ...
-  <div id="acs"></div> <!-- <= Place where the ACS button will show -->
+  <div id="acs-blink"></div> <!-- <= Place where the ACS button will show -->
   ...
   <script>
     (function (w, d, s, o, f, js, fjs) {
         w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
         js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
         js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
-    }(window, document, 'script', '_acs', 'https://TODO/acs-widget-staging/widget.js'));
-    _acs('init', {
-      element: document.getElementById('acs'),
+    }(window, document, 'script', '_acs_blink', 'https://d365a01fpruiwk.cloudfront.net/acs-widget-actions-staging/widget.js'));
+    _acs_blink('init', {
+      element: document.getElementById('acs-blink'),
       poolId: 'Fxh4hDFHJuTfD3Eq4en36dTk8QvbsSMoTE5Y2hVX3qVt',
       poolName: "The Block",
     });
@@ -33,10 +33,10 @@ In order to embed the widget add the following snippet at any location on the ho
     // airdrop - amount of ACS (with decimals) airdroped against your pool
     // ----------------------------------------------------------------
     // NOTE: To get ACS withtout decimals divide the numbers by 10 ** 6
-    document.querySelector("#acs").addEventListener("connected", (event) => {
+    document.querySelector("#acs-blink").addEventListener("connected", (event) => {
       console.log("Connected to the wallet: " + JSON.stringify(event.detail));
     });
-    document.querySelector("#acs").addEventListener("bought", (event) => {
+    document.querySelector("#acs-blink").addEventListener("bought", (event) => {
       console.log("Bought tNFT with signature: " + JSON.stringify(event.detail));
     });
   </script>
@@ -50,8 +50,8 @@ You can optionally change CSS class prefix `classPrefix` to provide your CSS sty
 ## Production builds
 
 For production use these URLs:
-- `https://TODO.cloudfront.net/acs-widget/widget.js`
-- `https://TODO.cloudfront.net/acs-widget/main.css`
+- `https://d365a01fpruiwk.cloudfront.net/acs-widget-actions/widget.js`
+- `https://d365a01fpruiwk.cloudfront.net/acs-widget-actions/main.css`
 
 ## Develop
 
@@ -73,7 +73,7 @@ git tag vX.X.X-beta && git push origin vX.X.X-beta
 ```
 
 After this wait for the Github Actions to finish the deploy to S3 and Cloudfront.
-The demo app will be avail at: https://XXX.cloudfront.net/acs-widget-staging/index.html
+The demo app will be avail at: https://d365a01fpruiwk.cloudfront.net/acs-widget-actions-staging/index.html
 
 
 ## Release new version to production
@@ -84,7 +84,7 @@ git tag vX.X.X && git push origin vX.X.X
 ```
 
 After this wait for the Github Actions to finish the deploy to S3 and Cloudfront.
-The demo app will be avail at: https://XXX.cloudfront.net/acs-widget/index.html
+The demo app will be avail at: https://d365a01fpruiwk.cloudfront.net/acs-widget-actions/index.html
 
 ## License
 The source and documentation in this project are released under the [MIT License](LICENSE)
