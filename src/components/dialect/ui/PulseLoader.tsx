@@ -12,7 +12,7 @@ type PulseLoaderProps = {
 
 const PulseLoader = ({ children, className, style }: PulseLoaderProps) => {
   return (
-    <div className={clsx('animate-pulse', className)} style={style}>
+    <div className={clsx('action-pulse-loader', className)} style={style}>
       {children}
     </div>
   );

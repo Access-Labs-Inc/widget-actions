@@ -78,11 +78,11 @@ const ActionContent = ({
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="action-content">
       {buttons && buttons.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="action-content-buttons">
           {buttons?.map((it, index) => (
-            <div key={index} className="flex-auto">
+            <div key={index} className="action-content-button-wrapper">
               <ActionButton {...it} />
             </div>
           ))}
@@ -105,7 +105,7 @@ const ActionForm = ({ form }: Required<Pick<LayoutProps, 'form'>>) => {
   const disabled = form.inputs.some((i) => i.required && values[i.name] === '');
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="action-form">
       {form.inputs.map((input) => (
         <ActionInput
           key={input.name}
@@ -137,34 +137,34 @@ export const ActionLayout = ({
   success,
 }: LayoutProps) => {
   return (
-    <div className="w-full max-w-[448px] overflow-hidden rounded-2xl bg-primary p-4 shadow-action">
+    <div className="action-layout">
       {image && (
         <Linkable url={websiteUrl}>
           <img
-            className={clsx('w-full object-cover object-left', {
-              'aspect-square': !form,
-              'aspect-[2/1] rounded-xl': form,
+            className={clsx('action-layout-image-base', {
+              'action-layout-image-no-form': !form,
+              'action-layout-image-form': form,
             })}
             src={image}
             alt="action-image"
           />
         </Linkable>
       )}
-      <div className="mt-4 flex flex-col">
-        <div className="mb-2 flex items-center gap-2">
+      <div className="action-layout-info">
+        <div className="action-layout-external-info">
           {websiteUrl && (
-            <div
-              // href={websiteUrl}
-              // target="_blank"
-              className="inline-flex items-center truncate text-subtext text-quaternary transition-colors motion-reduce:transition-none"
+            <a
+              href={websiteUrl}
+              target="_blank"
+              className="action-layout-website-link"
               rel="noopener noreferrer"
             >
-              <LinkIcon className="mr-2" />
+              <LinkIcon className="action-layout-website-link-icon" />
               {websiteText ?? websiteUrl}
-            </div>
+            </a>
           )}
           {websiteText && !websiteUrl && (
-            <span className="inline-flex items-center truncate text-subtext text-quaternary">
+            <span className="action-layout-website-text">
               {websiteText}
             </span>
           )}
@@ -172,7 +172,7 @@ export const ActionLayout = ({
             href="https://docs.dialect.to/documentation/actions/security"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center"
+            className="action-layout-security-link"
           >
             {type === 'malicious' && (
               <Badge
@@ -196,19 +196,21 @@ export const ActionLayout = ({
             )}
           </a>
         </div>
-        <span className="mb-0.5 text-text font-semibold text-primary">
+        <span className="action-layout-title">
           {title}
         </span>
-        <span className="mb-4 text-subtext text-secondary">{description}</span>
-        {disclaimer && <div className="mb-4">{disclaimer}</div>}
+        <span className="action-layout-description">
+          {description}
+        </span>
+        {disclaimer && <div className="action-layout-disclaimer">{disclaimer}</div>}
         <ActionContent form={form} inputs={inputs} buttons={buttons} />
         {success && (
-          <span className="mt-4 flex justify-center text-subtext text-accent-success">
+          <span className="action-layout-success">
             {success}
           </span>
         )}
         {error && !success && (
-          <span className="mt-4 flex justify-center text-subtext text-accent-error">
+          <span className="action-layout-error">
             {error}
           </span>
         )}
@@ -236,16 +238,16 @@ const ActionInput = ({
     (placeholder || 'Type here...') + (required ? '*' : '');
 
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-input-primary transition-colors focus-within:border-input-checked motion-reduce:transition-none">
+    <div className="action-input-wrapper">
       <input
         placeholder={placeholderWithRequired}
         value={value}
         disabled={disabled}
         onChange={extendedChange}
-        className="bg-transparent my-3 ml-4 flex-1 truncate outline-none placeholder:text-quaternary disabled:text-tertiary"
+        className="action-input"
       />
       {button && (
-        <div className="my-2 mr-2">
+        <div className="action-input-button-wrapper">
           <ActionButton
             {...button}
             onClick={() => button.onClick({ [name]: value })}
@@ -268,18 +270,18 @@ export const ActionButton = ({
   const ButtonContent = () => {
     if (loading)
       return (
-        <span className="flex flex-row items-center justify-center gap-2">
+        <span className="action-button-loading">
           {text} <SpinnerDots />
         </span>
       );
     if (variant === 'success')
       return (
-        <span className="flex flex-row items-center justify-center gap-2 text-accent-success">
+        <span className="action-button-success">
           {text}
           <CheckIcon />
         </span>
       );
-    return <Fragment>text</Fragment>;
+    return <Fragment>{text}</Fragment>;
   };
 
   return (

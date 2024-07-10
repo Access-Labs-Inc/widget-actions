@@ -226,8 +226,6 @@ export const ActionContainer = ({
     init();
   }, [initialApiUrl]);
 
-  console.log("Actions: ", action)
-
   const buttons = useMemo(
     () =>
       toSpliced(action?.actions
@@ -239,8 +237,6 @@ export const ActionContainer = ({
         ), SOFT_LIMIT_BUTTONS) ?? [],
     [action, executionState.executingAction],
   );
-
-  console.log("Buttons: ", buttons)
 
   const inputs = useMemo(
     () =>
@@ -264,7 +260,7 @@ export const ActionContainer = ({
             please{' '}
             <a
               href="#"
-              className="cursor-pointer underline"
+              className="action-container-unsafe-submit-issue-link"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -273,7 +269,7 @@ export const ActionContainer = ({
             .
           </p>
           <button
-            className="mt-3 font-semibold transition-colors hover:text-accent-error-lighter motion-reduce:transition-none"
+            className="action-container-unsafe-ignore-button"
             onClick={() => dispatch({ type: ExecutionType.UNBLOCK })}
           >
             Ignore warning & proceed
@@ -290,7 +286,7 @@ export const ActionContainer = ({
             the source.
           </p>
           <a
-            className="mt-3 inline-block font-semibold transition-colors hover:text-accent-warning-lighter motion-reduce:transition-none"
+            className="action-container-unknown-report-link"
             href="https://discord.gg/saydialect"
             target="_blank"
             rel="noopener noreferrer"
