@@ -1,5 +1,5 @@
-import * as React from 'preact';
-import { h } from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 import { useMemo, Fragment } from 'preact/compat';
 
 const POINTS = [0, 45, 90, 135, 180, 225, 270, 315];

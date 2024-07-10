@@ -1,5 +1,5 @@
-import { h } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 import { useContext } from 'preact/hooks';
 
 import { ConfigContext } from '../AppContext';

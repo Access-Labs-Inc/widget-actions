@@ -1,7 +1,9 @@
-import { h } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h } from 'preact';
 
-import { type SVGProps } from 'react';
+interface SVGProps<T extends SVGElement = SVGElement>
+  extends preact.JSX.SVGAttributes<T> {
+}
 
 export const ExclamationShieldIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg

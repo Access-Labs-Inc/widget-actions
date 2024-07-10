@@ -1,5 +1,5 @@
-import { h, Fragment } from 'preact';
-import * as React from 'preact';
+// @ts-ignore
+import React, { h, Fragment } from 'preact';
 import { BaseWalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 const WalletIcon = () => (

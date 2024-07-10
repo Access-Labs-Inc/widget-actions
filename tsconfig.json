@@ -1,9 +1,8 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "lib": ["es6", "dom"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "rootDir": "./",
@@ -28,5 +27,6 @@
   },
   "include": ["**/*.ts"],
   "exclude": ["**/node_modules", "access-protocol"],
-  "types": ["typePatches"]
+  "types": ["typePatches"],
+  "$schema": "https://json.schemastore.org/tsconfig"
 }
