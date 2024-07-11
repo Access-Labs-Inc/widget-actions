@@ -12,12 +12,10 @@ const WalletIcon = () => (
 );
 
 const CONNECT_WALLET = (
-  <Fragment>
-    <div className="flex flex-row items-center justify-center gap-3">
-      <WalletIcon />
-      Connect Wallet
-    </div>
-  </Fragment>
+  <div className="solana-wallet-button-connect-wallet">
+    <WalletIcon />
+    Connect Wallet
+  </div>
 );
 const LABELS = {
   'change-wallet': 'Change wallet',
@@ -31,7 +29,7 @@ const LABELS = {
 
 export const SolanaWalletButton = () => {
   return (
-    <div className="flex items-center justify-center">
+    <div className="solana-wallet-button-connect-wallet-wrap">
       {/*@ts-expect-error labels type*/}
       <BaseWalletMultiButton labels={LABELS} />
     </div>

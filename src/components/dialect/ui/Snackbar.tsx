@@ -10,8 +10,8 @@ interface Props {
 }
 
 const variantClasses: Record<SnackbarVariant, string> = {
-  error: 'bg-accent-error/10 text-accent-error border-accent-error',
-  warning: 'bg-accent-warning/10 text-accent-warning border-accent-warning',
+  error: 'action-snackbar-error',
+  warning: 'action-snackbar-warning'
 };
 
 export const Snackbar = ({ variant = 'warning', children }: Props) => {
@@ -19,7 +19,7 @@ export const Snackbar = ({ variant = 'warning', children }: Props) => {
     <div
       className={clsx(
         variantClasses[variant],
-        'rounded-lg border p-3 text-subtext',
+        'action-snackbar-default',
       )}
     >
       {children}

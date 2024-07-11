@@ -30,3 +30,171 @@ html {
 .wallet-adapter-modal-title {
   @apply text-highlight font-bold;
 }
+
+.action-button-loading {
+  @apply flex flex-row items-center justify-center gap-2;
+}
+
+.action-button-success {
+  @apply flex flex-row items-center justify-center gap-2 text-accent-success;
+}
+
+.action-input-wrapper {
+  @apply flex items-center gap-2 rounded-lg border border-input-primary transition-colors focus-within:border-input-checked motion-reduce:transition-none;
+}
+
+.action-input {
+  @apply bg-transparent my-3 ml-4 flex-1 truncate outline-none placeholder:text-quaternary disabled:text-tertiary;
+}
+
+.action-input-button-wrapper {
+  @apply my-2 mr-2;
+}
+
+.action-layout-error {
+  @apply mt-4 flex justify-center text-subtext text-accent-error;
+}
+
+.action-layout-success {
+  @apply mt-4 flex justify-center text-subtext text-accent-success;
+}
+
+.action-layout-disclaimer {
+  @apply mb-4;
+}
+
+.action-layout-description {
+  @apply mb-4 text-subtext text-secondary;
+}
+
+.action-layout-title {
+  @apply mb-0.5 text-text font-semibold text-primary;
+}
+
+.action-layout-security-link {
+  @apply flex items-center;
+}
+
+.action-layout-website-text {
+  @apply inline-flex items-center truncate text-subtext text-quaternary;
+}
+
+.action-layout-website-link {
+  @apply inline-flex items-center truncate text-subtext text-quaternary transition-colors motion-reduce:transition-none;
+}
+
+.action-layout-website-link-icon {
+  @apply mr-2;
+}
+
+.action-layout-external-info {
+  @apply mb-2 flex items-center gap-2;
+}
+
+.action-layout-info {
+  @apply mt-4 flex flex-col;
+}
+
+.action-layout-image-base {
+  @apply w-full object-cover object-left;
+}
+
+.action-layout-image-no-form {
+  @apply aspect-square;
+}
+
+.action-layout-image-form {
+  @apply aspect-[2/1] rounded-xl;
+}
+
+.action-layout {
+  @apply w-full max-w-[448px] overflow-hidden rounded-2xl bg-primary p-4 shadow-action;
+}
+
+.action-form {
+  @apply flex flex-col gap-3;
+}
+
+.action-content {
+  @apply flex flex-col gap-3;
+}
+
+.action-content-buttons {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.action-content-button-wrapper {
+  @apply flex-auto;
+}
+
+.action-container-unknown-report-link {
+  @apply mt-3 inline-block font-semibold transition-colors hover:text-accent-warning-lighter motion-reduce:transition-none;
+}
+
+.action-container-unsafe-submit-issue-link {
+  @apply cursor-pointer underline;
+}
+
+.action-container-unsafe-ignore-button {
+  @apply mt-3 font-semibold transition-colors hover:text-accent-error-lighter motion-reduce:transition-none;
+}
+
+.action-layout-skeleton {
+  @apply mt-3 w-full text-center overflow-hidden rounded-2xl bg-primary p-4 shadow-action;
+}
+
+.action-badge-error {
+  @apply bg-accent-error/10 text-accent-error hover:text-accent-error-lighter hover:bg-[#F62D2D1A] transition-colors motion-reduce:transition-none;
+}
+
+.action-badge-warning {
+  @apply bg-accent-warning/10 text-accent-warning hover:text-accent-warning-lighter transition-colors motion-reduce:transition-none;
+}
+
+.action-badge-default {
+  @apply bg-[#B3B3B31A] text-[#888989] hover:text-[#949CA4] transition-colors motion-reduce:transition-none;
+}
+
+.action-badge-wrap {
+  @apply inline-flex items-center justify-center gap-1 rounded-full text-subtext font-semibold leading-none;
+}
+
+.action-badge-no-children-icon {
+  @apply aspect-square p-1;
+}
+
+.action-badge-children {
+  @apply px-1.5 py-1;
+}
+
+.action-button {
+  @apply flex h-10 w-full flex-row items-center justify-center gap-2 rounded-lg px-6 py-3 text-text font-semibold;
+}
+
+.action-button-success {
+  @apply bg-accent-success/10 text-accent-success;
+}
+
+.action-button-disabled-not-success {
+  @apply bg-button-primary/50 text-inverse;
+}
+
+.action-button-not-disabled-not-success {
+  @apply cursor-pointer bg-button-primary text-inverse;
+}
+
+.action-pulse-loader {
+  @apply animate-pulse;
+}
+
+.action-snackbar-error {
+  @apply bg-accent-error/10 text-accent-error border-accent-error;
+}
+
+.action-snackbar-warning {
+  @apply bg-accent-warning/10 text-accent-warning border-accent-warning;
+}
+
+.action-snackbar-default {
+  @apply rounded-lg border p-3 text-subtext;
+}

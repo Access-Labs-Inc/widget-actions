@@ -3,7 +3,7 @@ import React, { h } from 'preact';
 
 const ActionLayoutSkeleton = () => {
   return (
-    <div className="mt-3 w-full text-center overflow-hidden rounded-2xl bg-primary p-4 shadow-action">
+    <div className="action-layout-skeleton">
       Loading...
     </div>
   );

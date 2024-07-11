@@ -12,12 +12,9 @@ interface Props {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  error:
-    'bg-accent-error/10 text-accent-error hover:text-accent-error-lighter hover:bg-[#F62D2D1A] transition-colors motion-reduce:transition-none',
-  warning:
-    'bg-accent-warning/10 text-accent-warning hover:text-accent-warning-lighter transition-colors motion-reduce:transition-none',
-  default:
-    'bg-[#B3B3B31A] text-[#888989] hover:text-[#949CA4] transition-colors motion-reduce:transition-none',
+  error: 'action-badge-error',
+  warning: 'action-badge-warning',
+  default: 'action-badge-default'
 };
 
 export const Badge = ({
@@ -30,11 +27,11 @@ export const Badge = ({
     <div
       className={clsx(
         variantClasses[variant],
-        'inline-flex items-center justify-center gap-1 rounded-full text-subtext font-semibold leading-none',
+        'action-badge-wrap',
         className,
         {
-          'aspect-square p-1': !children && icon,
-          'px-1.5 py-1': children,
+          'action-badge-no-children-icon': !children && icon,
+          'action-badge-children': children,
         },
       )}
     >
