@@ -395,11 +395,11 @@ export const ActionContainer = ({
   return (
     <ActionLayout
       type={actionState}
-      title={showTitle ? action.title : null}
-      description={showDescription ? action.description : null}
-      websiteUrl={showWebsite ? website.link : null}
-      websiteText={showWebsite ? website.text : null}
-      image={showImage ? action.icon : null}
+      title={showTitle ? action.title : undefined}
+      description={showDescription ? action.description : undefined}
+      websiteUrl={showWebsite ? website.link : undefined}
+      websiteText={showWebsite ? website.text : undefined}
+      image={showImage ? action.icon : undefined}
       error={
         executionState.status !== 'success'
           ? executionState.errorMessage ?? action.error

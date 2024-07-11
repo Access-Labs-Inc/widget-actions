@@ -29,8 +29,8 @@ interface LayoutProps {
   websiteText?: string | null;
   disclaimer?: ComponentChildren;
   type: ActionType;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   buttons?: ButtonProps[];
   inputs?: InputProps[];
   form?: FormProps;

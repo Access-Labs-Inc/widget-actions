@@ -60,4 +60,4 @@ typings/
 
 dist/
 stats.json
-
+.build
