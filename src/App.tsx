@@ -8,7 +8,7 @@ import {
 } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { TipLinkWalletAdapter } from '@tiplink/wallet-adapter';
-import { TipLinkWalletAutoConnect } from '@tiplink/wallet-adapter-react-ui';
+import { TipLinkWalletAutoConnectV2 } from '@tiplink/wallet-adapter-react-ui';
 
 import { Configurations } from "./models";
 import Main from "./layout/Main";
@@ -34,13 +34,13 @@ export const App = ({ element, ...appSettings }: Props) => {
   return (
     <AppContext config={appSettings} element={element}>
       <ConnectionProvider endpoint={endpoint}>
-        <TipLinkWalletAutoConnect isReady query={searchParams}>
+        <TipLinkWalletAutoConnectV2 isReady query={searchParams}>
           <WalletProvider wallets={wallets} autoConnect>
             <WalletModalProvider>
               <Main />
             </WalletModalProvider>
           </WalletProvider>
-        </TipLinkWalletAutoConnect>
+        </TipLinkWalletAutoConnectV2>
       </ConnectionProvider>
     </AppContext>
   );
