@@ -12,9 +12,11 @@ export interface AppConfigurations {
   poolId: string | null;
   poolSlug: string | null;
   poolName: string | null;
-  disconnectButtonClass?: string | null;
-  connectedButtonClass?: string | null;
-  classPrefix: string;
+  websiteUrl: string | null;
+  showImage: boolean;
+  showTitle: boolean;
+  showDescription: boolean;
+  showWebsite: boolean;
 }
 
 export type Configurations = InfraConfigurations & AppConfigurations;

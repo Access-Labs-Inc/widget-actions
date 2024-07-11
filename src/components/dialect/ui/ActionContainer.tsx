@@ -164,11 +164,19 @@ const SOFT_LIMIT_INPUTS = 3;
 export const ActionContainer = ({
   initialApiUrl,
   websiteUrl,
+  showImage,
+  showTitle,
+  showDescription,
+  showWebsite,
   cluster = 'mainnet',
 }: {
-  cluster?: ClusterTarget;
   initialApiUrl: string;
   websiteUrl?: string;
+  showImage: boolean;
+  showTitle: boolean;
+  showDescription: boolean;
+  showWebsite: boolean;
+  cluster?: ClusterTarget;
 }) => {
   const { publicKey, sendTransaction } = useWallet();
   const { setVisible: setWalletModalVisible } = useWalletModal();
@@ -182,8 +190,6 @@ export const ActionContainer = ({
   const [executionState, dispatch] = useReducer(executionReducer, {
     status: actionState !== 'malicious' ? 'idle' : 'blocked',
   });
-
-  console.log("State: ", executionState);
 
   const website = useMemo(() => {
     // TODO: which label for link to show, us or the website
@@ -389,11 +395,11 @@ export const ActionContainer = ({
   return (
     <ActionLayout
       type={actionState}
-      title={action.title}
-      description={action.description}
-      websiteUrl={website.link}
-      websiteText={website.text}
-      image={action.icon}
+      title={showTitle ? action.title : undefined}
+      description={showDescription ? action.description : undefined}
+      websiteUrl={showWebsite ? website.link : undefined}
+      websiteText={showWebsite ? website.text : undefined}
+      image={showImage ? action.icon : undefined}
       error={
         executionState.status !== 'success'
           ? executionState.errorMessage ?? action.error

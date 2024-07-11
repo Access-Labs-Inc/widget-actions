@@ -6,7 +6,11 @@ export const testConfig = (override?: {}): Configurations =>
       poolId: '1',
       poolName: 'name',
       poolSlug: 'name',
-      classPrefix: 'prefix'
+      websiteUrl: null,
+      showWebsite: true,
+      showTitle: true,
+      showDescription: true,
+      showImage: true
     },
     override
   );

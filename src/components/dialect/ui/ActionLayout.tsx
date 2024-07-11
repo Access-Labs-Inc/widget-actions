@@ -29,8 +29,8 @@ interface LayoutProps {
   websiteText?: string | null;
   disclaimer?: ComponentChildren;
   type: ActionType;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   buttons?: ButtonProps[];
   inputs?: InputProps[];
   form?: FormProps;
@@ -150,71 +150,81 @@ export const ActionLayout = ({
           />
         </Linkable>
       )}
-      <div className="action-layout-info">
-        <div className="action-layout-external-info">
-          {websiteUrl && (
-            <a
-              href={websiteUrl}
-              target="_blank"
-              className="action-layout-website-link"
-              rel="noopener noreferrer"
-            >
-              <LinkIcon className="action-layout-website-link-icon" />
-              {websiteText ?? websiteUrl}
-            </a>
-          )}
-          {websiteText && !websiteUrl && (
-            <span className="action-layout-website-text">
-              {websiteText}
+      {(websiteUrl || websiteUrl || title || description || disclaimer) && (
+        <div className="action-layout-info">
+          <div className="action-layout-external-info">
+            {websiteUrl && (
+              <a
+                href={websiteUrl}
+                target="_blank"
+                className="action-layout-website-link"
+                rel="noopener noreferrer"
+              >
+                <LinkIcon className="action-layout-website-link-icon" />
+                {websiteText ?? websiteUrl}
+              </a>
+            )}
+            {websiteText && !websiteUrl && (
+              <span className="action-layout-website-text">
+                {websiteText}
+              </span>
+            )}
+            {(websiteUrl || websiteUrl) && (
+              <a
+                href="https://docs.dialect.to/documentation/actions/security"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="action-layout-security-link"
+              >
+                {type === 'malicious' && (
+                  <Badge
+                    variant="error"
+                    icon={<ExclamationShieldIcon width={13} height={13} />}
+                  >
+                    Blocked
+                  </Badge>
+                )}
+                {type === 'trusted' && (
+                  <Badge
+                    variant="default"
+                    icon={<InfoShieldIcon width={13} height={13} />}
+                  />
+                )}
+                {type === 'unknown' && (
+                  <Badge
+                    variant="warning"
+                    icon={<InfoShieldIcon width={13} height={13} />}
+                  />
+                )}
+              </a>
+            )}
+          </div>
+          {title && (
+            <span className="action-layout-title">
+              {title}
             </span>
           )}
-          <a
-            href="https://docs.dialect.to/documentation/actions/security"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="action-layout-security-link"
-          >
-            {type === 'malicious' && (
-              <Badge
-                variant="error"
-                icon={<ExclamationShieldIcon width={13} height={13} />}
-              >
-                Blocked
-              </Badge>
-            )}
-            {type === 'trusted' && (
-              <Badge
-                variant="default"
-                icon={<InfoShieldIcon width={13} height={13} />}
-              />
-            )}
-            {type === 'unknown' && (
-              <Badge
-                variant="warning"
-                icon={<InfoShieldIcon width={13} height={13} />}
-              />
-            )}
-          </a>
+          {description && (
+            <span className="action-layout-description">
+              {description}
+            </span>
+          )}
+          {disclaimer && (
+            <div className="action-layout-disclaimer">{disclaimer}</div>
+          )}
         </div>
-        <span className="action-layout-title">
-          {title}
+      )}
+      <ActionContent form={form} inputs={inputs} buttons={buttons} />
+      {success && (
+        <span className="action-layout-success">
+          {success}
         </span>
-        <span className="action-layout-description">
-          {description}
+      )}
+      {error && !success && (
+        <span className="action-layout-error">
+          {error}
         </span>
-        {disclaimer && <div className="action-layout-disclaimer">{disclaimer}</div>}
-        <ActionContent form={form} inputs={inputs} buttons={buttons} />
-        {success && (
-          <span className="action-layout-success">
-            {success}
-          </span>
-        )}
-        {error && !success && (
-          <span className="action-layout-error">
-            {error}
-          </span>
-        )}
-      </div>
+      )}
     </div>
   );
 };
