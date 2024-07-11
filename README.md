@@ -25,6 +25,11 @@ In order to embed the widget add the following snippet at any location on the ho
       element: document.getElementById('acs-blink'),
       poolId: 'Fxh4hDFHJuTfD3Eq4en36dTk8QvbsSMoTE5Y2hVX3qVt',
       poolName: "The Block",
+      websiteUrl: "https://theblock.co",
+      showWebsite: true,
+      showTitle: true,
+      showDescription: true,
+      showImage: true
     });
     // Here's how you listen for connected wallet and you'll receive:
     // { address: string; locked: number, airdrop: number }
