@@ -198,3 +198,11 @@ html {
 .action-snackbar-default {
   @apply rounded-lg border p-3 text-subtext;
 }
+
+.solana-wallet-button-connect-wallet {
+  @apply flex flex-row items-center justify-center gap-3;
+}
+
+.solana-wallet-button-connect-wallet-wrap {
+  @apply flex items-center justify-center;
+}

@@ -28,6 +28,10 @@
         poolName: "The Block",
         poolId: 'Fxh4hDFHJuTfD3Eq4en36dTk8QvbsSMoTE5Y2hVX3qVt',
         poolSlug: 'the-block',
+        showTitle: true,
+        showDescription: true,
+        showImage: true,
+        showWebsite: true,
       });
       document.querySelector("#acs-blink").addEventListener("connected", (event) => {
         console.log("Connected to the wallet with address: " + JSON.stringify(event.detail));
