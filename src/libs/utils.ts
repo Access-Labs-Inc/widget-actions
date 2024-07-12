@@ -47,7 +47,7 @@ export function timeout<T>(
   let timer: ReturnType<typeof setTimeout>;
   return Promise.race([
     promise,
-    new Promise<T | Error>((_res, rej) => {
+    new Promise<T | Error>((res, rej) => {
       timer = setTimeout(() => {
         rej(new TimeoutError(exceptionValue));
       }, time);
