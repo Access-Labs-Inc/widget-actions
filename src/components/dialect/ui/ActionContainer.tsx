@@ -3,12 +3,11 @@ import React, { h } from 'preact';
 import { useEffect, useMemo, useReducer, useState, useContext } from 'preact/compat';
 import { Buffer } from 'buffer';
 import { ActionLayout, ButtonProps } from './ActionLayout';
-import { VersionedTransaction } from '@solana/web3.js';
+import { Connection, VersionedTransaction } from '@solana/web3.js';
 import { Action, ActionComponent } from '../api/Action';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import ActionLayoutSkeleton from '../ui/ActionLayoutSkeleton';
-import { PublicConnection } from '../utils/public-connection';
 import { Snackbar } from '../ui/Snackbar';
 import { ConfigContext } from '../../../AppContext';
 import {
@@ -16,49 +15,47 @@ import {
   getExtendedActionState,
 } from '../api/ActionsRegistry';
 import { ClusterTarget } from '../constants';
-import { toSpliced } from '../../../libs/utils';
+import { isTimeoutError, timeout, toSpliced } from '../../../libs/utils';
+import { sleep } from '@accessprotocol/js';
 
 const CONFIRM_TIMEOUT_MS = 60000 * 1.2; // 20% extra time
+const CONFIRM_STATUS = "confirmed";
 
-const confirmTransaction = (
+const confirmTransaction = async (
   signature: string,
-  cluster: ClusterTarget = 'mainnet',
+  connection: Connection
 ) => {
-  return new Promise<void>((res, rej) => {
-    const start = Date.now();
+  for (let i=0; i<90; i+=1) {
+    try {
+      const status = await timeout(
+        connection.getSignatureStatus(signature, {
+          searchTransactionHistory: true
+        }),
+        CONFIRM_TIMEOUT_MS,
+        "Timing out waiting for signature"
+      );
 
-    const confirm = async () => {
-      if (Date.now() - start >= CONFIRM_TIMEOUT_MS) {
-        rej(new Error('Unable to confirm transaction'));
-        return;
+      if (isTimeoutError(status)) {
+        console.log(`Confirming signature ${signature} attemp ${i} ~ 1s sleep`);
+        await sleep(1000);
+      } else if (status.value?.err) {
+        throw new Error('Transaction execution failed');
+      } else {
+        const statusValue = status.value?.confirmationStatus;
+        if (statusValue === CONFIRM_STATUS || statusValue === "finalized") {
+          return;
+        }
       }
-
-      try {
-        const status =
-          await PublicConnection.getInstance(
-            cluster,
-          ).connection.getSignatureStatus(signature);
-
-        // if error present, transaction failed
-        if (status.value?.err) {
-          rej(new Error('Transaction execution failed'));
-          return;
-        }
-
-        // if has confirmations, transaction is successful
-        if (status.value && status.value.confirmations !== null) {
-          res();
-          return;
-        }
-      } catch (e) {
+    } catch (e) {
+      if (isTimeoutError(e)) {
+        console.log(`Confirming signature ${signature} attemp ${i} ~ 1s sleep`);
+        await sleep(1000);
+      } else {
         console.error('Error confirming transaction', e);
+        throw e;
       }
-
-      setTimeout(confirm, 3000);
-    };
-
-    confirm();
-  });
+    }
+  }
 };
 
 type ExecutionStatus = 'blocked' | 'idle' | 'executing' | 'success' | 'error';
@@ -168,7 +165,6 @@ export const ActionContainer = ({
   showTitle,
   showDescription,
   showWebsite,
-  cluster = 'mainnet',
 }: {
   initialApiUrl: string;
   websiteUrl?: string;
@@ -181,6 +177,7 @@ export const ActionContainer = ({
   const { publicKey, sendTransaction } = useWallet();
   const { setVisible: setWalletModalVisible } = useWalletModal();
   const { element } = useContext(ConfigContext);
+  const { connection } = useConnection();
 
   const [action, setAction] = useState<Action | null>(null);
   const [actionState, setActionState] = useState(
@@ -312,6 +309,7 @@ export const ActionContainer = ({
 
   const execute = async (
     component: ActionComponent,
+    connection: Connection,
     params?: Record<string, string>,
   ) => {
     if (component.parameter && params) {
@@ -339,7 +337,7 @@ export const ActionContainer = ({
 
       const result = await sendTransaction(
         VersionedTransaction.deserialize(Buffer.from(tx.transaction, 'base64')),
-        PublicConnection.getInstance(cluster).connection,
+        connection,
       )
         .then((signature) => ({ signature, error: null }))
         .catch((e) => ({ signature: null, error: e }));
@@ -347,7 +345,7 @@ export const ActionContainer = ({
       if (result.error || !result.signature) {
         dispatch({ type: ExecutionType.RESET });
       } else {
-        await confirmTransaction(result.signature, cluster);
+        await confirmTransaction(result.signature, connection);
         dispatch({
           type: ExecutionType.FINISH,
           successMessage: tx.message,
@@ -372,25 +370,27 @@ export const ActionContainer = ({
     }
   };
 
-  const asButtonProps = (it: ActionComponent): ButtonProps => ({
-    text: buttonLabelMap[executionState.status] ?? it.label,
-    loading:
-      executionState.status === 'executing' &&
-      it === executionState.executingAction,
-    disabled: action.disabled || executionState.status !== 'idle',
-    variant: buttonVariantMap[executionState.status],
-    onClick: (params?: Record<string, string>) => execute(it, params),
-  });
-
-  const asInputProps = (it: ActionComponent) => {
-    return {
-      // since we already filter this, we can safely assume that parameter is not null
-      placeholder: it.parameter!.label,
+  const asButtonProps = (connection: Connection) =>
+    (it: ActionComponent): ButtonProps => ({
+      text: buttonLabelMap[executionState.status] ?? it.label,
+      loading:
+        executionState.status === 'executing' &&
+        it === executionState.executingAction,
       disabled: action.disabled || executionState.status !== 'idle',
-      name: it.parameter!.name,
-      button: asButtonProps(it),
+      variant: buttonVariantMap[executionState.status],
+      onClick: (params?: Record<string, string>) => execute(it, connection, params),
+    });
+
+  const asInputProps = (connection: Connection) =>
+    (it: ActionComponent) => {
+      return {
+        // since we already filter this, we can safely assume that parameter is not null
+        placeholder: it.parameter!.label,
+        disabled: action.disabled || executionState.status !== 'idle',
+        name: it.parameter!.name,
+        button: asButtonProps(connection)(it),
+      };
     };
-  };
 
   return (
     <ActionLayout
@@ -406,8 +406,8 @@ export const ActionContainer = ({
           : null
       }
       success={executionState.successMessage}
-      buttons={buttons.map(asButtonProps)}
-      inputs={inputs.map(asInputProps)}
+      buttons={buttons.map(asButtonProps(connection))}
+      inputs={inputs.map(asInputProps(connection))}
       disclaimer={disclaimer}
     />
   );
