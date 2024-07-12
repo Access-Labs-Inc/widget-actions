@@ -32,3 +32,27 @@ export function toSpliced<T>(arr: T[] | undefined, n: number): T[] {
   carr.splice(n);
   return carr;
 }
+
+class TimeoutError extends Error {}
+
+export function isTimeoutError(err: any): err is TimeoutError {
+  return err instanceof TimeoutError;
+}
+
+export function timeout<T>(
+  promise: Promise<T>,
+  time: number,
+  exceptionValue: string,
+): Promise<T | Error> {
+  let timer: ReturnType<typeof setTimeout>;
+  return Promise.race([
+    promise,
+    new Promise<T | Error>((res, rej) => {
+      timer = setTimeout(() => {
+        rej(new TimeoutError(exceptionValue));
+      }, time);
+    }),
+  ]).finally(() => {
+    clearTimeout(timer);
+  }) as Promise<T | Error>;
+}
