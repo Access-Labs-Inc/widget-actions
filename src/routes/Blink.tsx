@@ -14,7 +14,7 @@ export const Blink = () => {
     showImage,
     showWebsite
   } = useContext(ConfigContext);
-  const actionUrl = `https://actions.dialect.to/api/access-protocol/subscribe/${poolSlug}`;
+  const actionUrl = `https://access-protocol.dial.to/subscribe/${poolSlug}`;
 
   return (
     <ActionContainer
