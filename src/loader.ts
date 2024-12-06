@@ -80,6 +80,11 @@ export default (
           throw new Error("You must provide 'poolName' in 'init' method.");
         }
 
+        if (loadedObject.poolSlug == null) {
+          throw new Error("You must provide 'poolSlug' in 'init' method.");
+        }
+
+
         // the actual rendering of the widget
         const wrappingElement = loadedObject.element ?? win.document.body;
         targetElement = wrappingElement.appendChild(
